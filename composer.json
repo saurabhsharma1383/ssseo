@@ -7,10 +7,6 @@
     "type": "magento2-module",
     "version": "2.0.0",
     "extra": {
-        "map": [
-            [
-                "app/code/"            
-			]
-        ]
+        "map": [ [ "*", "Ss\/Seo" ] ]
     }
 }
