@@ -9,9 +9,8 @@
     "extra": {
         "map": [
             [
-                "app/code/",
-                "Ss/Seo"
-            ]
+                "app/code/"            
+			]
         ]
     }
 }
