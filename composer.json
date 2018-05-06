@@ -6,6 +6,15 @@
     },
     "type": "magento2-module",
     "version": "2.0.0",
+	"require": {},
+    "autoload": {
+        "psr-4": {
+            "Ss\\Seo\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    },
     "extra": {
         "map": [
             [
