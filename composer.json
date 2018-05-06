@@ -1,17 +1,21 @@
 {
-    "name": "ss/seo",
+    "name": "Ss/Seo",
     "description": "seo data update in magento2",
     "require": {
         "magento/magento-composer-installer": "*"
     },
     "type": "magento2-module",
     "version": "2.0.0",
-    "extra": {
-        "map": [
-            [
-                "*",
-                "Ss/Seo"
-            ]
-        ]
+	"license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "app\\code\\": ""
+        }
     }
 }
