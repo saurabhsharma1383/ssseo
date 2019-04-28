@@ -55,9 +55,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 		$uploadedFile = fopen($seoFile, "r");
 		$i=1;
 		
-		$metaObj = $this->_objectmanager->get('Magento\Framework\View\Result\PageFactory');
-		$resultPage = $metaObj->create();
-				
+		/* $metaObj = $this->_objectmanager->get('Magento\Framework\View\Result\PageFactory');
+		$resultPage = $metaObj->create(); */
+		
+		$resultPage = $this->_objectmanager->create('Magento\Framework\View\Result\Page');
+		$pageConfig = $resultPage->getConfig();
 		//while(! feof($uploadedFile)){
 		while ( ($dataArray = fgetcsv($uploadedFile, 500, ",")) !==FALSE) {
 			if($i==1){
@@ -71,7 +73,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 				$title = $dataArray[$data['title']];
 				$desc = $dataArray[$data['description']];
 				$robots = $dataArray[$data['robots']];
-				$canonical = $dataArray[$data['canonical']];
+				$canonicalUrl = $dataArray[$data['canonical']];
 				
 				// Get entity from url
 				
@@ -120,13 +122,21 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 				}
 				// open robots.txt
 				
-				if($robots=='Allow'){
+				if($robots=='INDEX, FOLLOW'){
 					continue;
 				}
 				else{
-					$robotsDataCan = 'DisAllow		'.$canonical.PHP_EOL;
+					$robotsDataCan = 'DisAllow		'.$url.PHP_EOL;
 					fwrite($rfile, $robotsDataCan);
 				}
+				
+				// Canonical
+				
+				$pageConfig->addRemotePageAsset(
+					$canonicalUrl,
+					'canonical',
+					['attributes' => ['rel' => 'canonical']]
+				);
 			}
 			$i++;
 		}
